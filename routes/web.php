@@ -23,3 +23,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::get('/', WelcomeController::class);
+
+Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
