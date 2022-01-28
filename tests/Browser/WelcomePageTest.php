@@ -19,22 +19,22 @@ class ExampleTest extends DuskTestCase
         $categories= Category::factory()->create();
         $this->browse(function (Browser $browser) use ($categories){
             $browser->visit('/')
-                    ->clickLink('Categorías')
-                    ->assertSee($categories->name)
-            ->screenshot('see_category-test');
+                ->clickLink('Categorías')
+                ->assertSee($categories->name)
+                ->screenshot('see_category-test');
         });
     }
 
     /** @test */
-    public function see_subcategory()
+    /*public function see_subcategory()
     {
         $category1 = Category::factory()->create([
             'name' => 'Celulares y tablets'
         ]);
 
-       $sub1 = Subcategory::factory()->create([
-           'category_id' => $category1->id
-       ]);
+        $sub1 = Subcategory::factory()->create([
+            'category_id' => $category1->id
+        ]);
 
         dd($sub1);
 
@@ -45,5 +45,5 @@ class ExampleTest extends DuskTestCase
                 ->screenshot('see_subcategory-test');
         });
 
-    }
+    }*/
 }
