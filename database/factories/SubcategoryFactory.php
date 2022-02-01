@@ -16,13 +16,14 @@ class SubcategoryFactory extends Factory
     public function definition()
     {
         $category = Category::all()->random();
-        $color = collect([true,false])->random();
-        $size = collect([true,false])->random();
+        $color = collect([true, false])->random();
+        $size = collect([true, false])->random();
+        $name = $this->faker->word;
 
         return [
             'category_id' => $category->id,
-            'name' => 'Mujeres',
-            'slug' => Str::slug('Mujeres'),
+            'name' => $name,
+            'slug' => Str::slug($name),
             'color' => $color,
             'size' => $color ? $size : false,
             'image' => 'subcategories/' . $this->faker->image(storage_path('app/public/subcategories'), 640, 480, null, false)
