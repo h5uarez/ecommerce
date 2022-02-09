@@ -58,7 +58,7 @@
             @else
                 <x-jet-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <i class="fas fa-user-circle text-white text-3xl cursor-pointer" dusk="not_logged" ></i>
+                        <i dusk="not_logged" class="fas fa-user-circle text-white text-3xl cursor-pointer"></i>
                     </x-slot>
 
                     <x-slot name="content">
@@ -87,7 +87,8 @@
                 <ul class="bg-white">
                     @foreach($categories as $category)
                         <li class="navigation-link text-trueGray-500 hover:bg-orange-500 hover:text-white">
-                            <a dusk="category" href="{{ route('categories.show', $category) }}" class="py-2 px-4 text-sm flex items-center">
+                            <a href="{{ route('categories.show', $category) }}"
+                               class="py-2 px-4 text-sm flex items-center">
                                 <span class="flex justify-center w-9">
                                     {!! $category->icon !!}
                                 </span>
@@ -106,6 +107,7 @@
                 </div>
             </div>
         </div>
+
         <div class="bg-white h-full overflow-y-auto">
             <div class="container-menu bg-gray-200 py-3 mb-2">
                 @livewire('search')
@@ -114,33 +116,34 @@
                 @foreach($categories as $category)
                     <li class="text-trueGray-500 hover:bg-orange-500 hover:text-white">
                         <a href="{{ route('categories.show', $category) }}" class="py-2 px-4 text-sm flex items-center">
-                         <span class="flex justify-center w-9">
-                         {!! $category->icon !!}
-                         </span>
+                            <span class="flex justify-center w-9">
+                                {!! $category->icon !!}
+                            </span>
                             {{ $category->name }}
                         </a>
                     </li>
                 @endforeach
             </ul>
+
             <p class="text-trueGray-500 px-6 my-2">USUARIOS</p>
 
             @livewire('cart-movil')
 
             @auth
                 <a href="{{ route('profile.show') }}" class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500
-hover:text-white">
- <span class="flex justify-center w-9">
- <i class="far fa-address-card"></i>
- </span>
+                hover:text-white">
+                    <span class="flex justify-center w-9">
+                        <i class="far fa-address-card"></i>
+                    </span>
                     Perfil
                 </a>
                 <a href=""
                    onclick="event.preventDefault();
- document.getElementById('logout-form').submit()"
+                   document.getElementById('logout-form').submit()"
                    class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500 hover:text-white">
- <span class="flex justify-center w-9">
- <i class="fas fa-sign-out-alt"></i>
- </span>
+                    <span class="flex justify-center w-9">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </span>
                     Cerrar sesión
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
@@ -148,17 +151,17 @@ hover:text-white">
                 </form>
             @else
                 <a href="{{ route('login') }}" class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500
-hover:text-white" >
- <span class="flex justify-center w-9">
- <i class="fas fa-user-circle"></i>
- </span>
+                hover:text-white">
+                    <span class="flex justify-center w-9">
+                        <i class="fas fa-user-circle not_logged"></i>
+                    </span>
                     Iniciar sesión
                 </a>
                 <a href="{{ route('register') }}" class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500
-hover:text-white">
- <span class="flex justify-center w-9">
- <i class="fas fa-fingerprint"></i>
- </span>
+                hover:text-white">
+                    <span class="flex justify-center w-9">
+                        <i class="fas fa-fingerprint"></i>
+                    </span>
                     Registrar
                 </a>
             @endauth

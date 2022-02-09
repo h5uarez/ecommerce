@@ -18,7 +18,7 @@ class SubcategoryFactory extends Factory
         $category = Category::all()->random();
         $color = collect([true, false])->random();
         $size = collect([true, false])->random();
-        $name = $this->faker->word;
+        $name = $this->faker->sentence();
 
         return [
             'category_id' => $category->id,

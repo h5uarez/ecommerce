@@ -40,7 +40,6 @@ class SubcategoryTest extends DuskTestCase
             $browser->visit('/')
                 ->clickLink('Categorías')
                 ->assertSee($category1->name)
-                ->mouseover('@category')
                 ->assertSee('Celulares y smartphones')
                 ->screenshot('see_subcategory-test');
         });

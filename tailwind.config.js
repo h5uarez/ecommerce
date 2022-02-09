@@ -15,10 +15,16 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-             trueGray: colors.trueGray,
-             orange: colors.orange,
-             lime: colors.lime,
-             }
+                trueGray: colors.trueGray,
+                orange: colors.orange,
+                lime: colors.lime,
+            }
+        },
+    },
+
+    variants: {
+        extend: {
+            opacity: ['disabled'],
         },
     },
 

@@ -29,7 +29,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomElement([19.99, 49.99, 99.99]),
             'subcategory_id' => $subcategory->id,
             'brand_id' => $brand->id,
-            'quantity'=> $subcategory->color ? null : 15,
+            'quantity' => $subcategory->color ? null : 15,
             'status' => 2
         ];
     }
