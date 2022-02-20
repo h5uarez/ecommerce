@@ -28,13 +28,15 @@ class CreateOrder extends Component
         $this->departments = Department::all();
     }
 
-    public function updatedDepartmentId($value){
+    public function updatedDepartmentId($value)
+    {
         $this->cities = City::where('department_id', $value)->get();
 
         $this->reset(['city_id', 'district_id']);
     }
 
-    public function updatedCityId($value){
+    public function updatedCityId($value)
+    {
         $city = City::find($value);
 
         $this->shipping_cost = $city->cost;
@@ -87,6 +89,10 @@ class CreateOrder extends Component
         }
 
         $order->save();
+
+        foreach (Cart::content() as $item) {
+            discount($item);
+        }
 
         Cart::destroy();
 

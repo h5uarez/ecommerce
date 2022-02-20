@@ -26,7 +26,8 @@
                     <x-slot name="trigger">
                         <button
                             class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                            <img dusk="loggin_img" class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
+                            <img dusk="loggin_img" class="h-8 w-8 rounded-full object-cover"
+                                 src="{{ Auth::user()->profile_photo_url }}"
                                  alt="{{ Auth::user()->name }}"/>
                         </button>
                     </x-slot>
@@ -39,6 +40,14 @@
 
                         <x-jet-dropdown-link href="{{ route('profile.show') }}">
                             {{ __('Profile') }}
+                        </x-jet-dropdown-link>
+
+                        <x-jet-dropdown-link href="{{ route('orders.index') }}">
+                            {{ __('My Orders') }}
+                        </x-jet-dropdown-link>
+                        
+                        <x-jet-dropdown-link href="{{ route('admin.index') }}">
+                            {{ __('Admin') }}
                         </x-jet-dropdown-link>
 
                         <div class="border-t border-gray-100"></div>
