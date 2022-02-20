@@ -21,6 +21,7 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ asset('vendor/ckeditor/build/ckeditor.js') }}"></script>
     <script src="{{ asset('vendor/glider-js/glider.min.js') }}"></script>
     <script src="{{ asset('vendor/flex-slider/node_modules/jquery/dist/jquery.js') }}"></script>
     <script src="{{ asset('vendor/flex-slider/jquery.flexslider-min.js') }}"></script>
