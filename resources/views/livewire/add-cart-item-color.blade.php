@@ -1,8 +1,7 @@
 <div x-data>
     <p class="text-xl text-gray-700">Color:</p>
-
-    <select wire:model="color_id" class="form-control w-full" dusk="seleccionar_color">
-        <option value="" selected disabled>Seleccionar un color</option>
+    <select wire:model="color_id" class="form-control w-full">
+        <option dusk="color" value="" selected disabled>Seleccionar un color</option>
         @foreach ($colors as $color)
             <option value="{{$color->id}}">{{  __(ucfirst($color->name)) }}</option>
         @endforeach
@@ -28,11 +27,10 @@
                 -
             </x-jet-secondary-button>
             <span class="mx-2 text-gray-700">{{ $qty }}</span>
-            <x-jet-secondary-button
-                x-bind:disabled="$wire.qty >= $wire.quantity"
-                wire:loading.attr="disabled"
-                wire:target="increment"
-                wire:click="increment">
+            <x-jet-secondary-button wire:click="increment"
+                                    x-bind:disabled="$wire.qty >= $wire.quantity"
+                                    wire:loading.attr="disabled"
+                                    wire:target="increment">
                 +
             </x-jet-secondary-button>
         </div>
@@ -42,8 +40,7 @@
                 wire:click="addItem"
                 wire:loading.attr="disabled"
                 wire:target="addItem"
-                class="w-full"
-                color="orange">
+                class="w-full" color="orange">
                 Agregar al carrito de compras
             </x-button>
         </div>

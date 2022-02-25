@@ -16,22 +16,16 @@ class UpdateCartItem extends Component
         $this->qty = $item->qty;
         $this->quantity = qty_available($item->id);
     }
-
     public function decrement()
     {
         $this->qty--;
-
         Cart::update($this->rowId, $this->qty);
-
         $this->emit('render');
     }
-
     public function increment()
     {
         $this->qty++;
-
         Cart::update($this->rowId, $this->qty);
-
         $this->emit('render');
     }
 

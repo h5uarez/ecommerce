@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\City;
-use App\Models\Department;
-use App\Models\District;
 use Illuminate\Database\Seeder;
+use App\Models\{Department, City, District};
 
 class DepartmentSeeder extends Seeder
 {

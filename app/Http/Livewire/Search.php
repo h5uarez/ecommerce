@@ -2,18 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
 use Livewire\Component;
+use App\Models\Product;
 
 class Search extends Component
 {
     public $search;
     public $open = false;
-
-    public function updatedSearch($value)
-    {
-        $value ? $this->open = true : $this->open = false;
-    }
 
     public function render()
     {
@@ -22,5 +17,10 @@ class Search extends Component
             : [];
 
         return view('livewire.search', compact('products'));
+    }
+
+    public function updatedSearch($value)
+    {
+        $value ? $this->open = true :$this->open = false;
     }
 }

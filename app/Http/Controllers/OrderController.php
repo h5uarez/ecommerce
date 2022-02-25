@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Order;
 
 class OrderController extends Controller
@@ -18,6 +19,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::query()->where('user_id', auth()->user()->id);
+
         if (request('status')) {
             $orders->where('status', request('status'));
         }
@@ -27,6 +29,7 @@ class OrderController extends Controller
         for ($i = 1; $i <= 5; $i++) {
             $ordersByStatus[$i] = Order::where('user_id', auth()->user()->id)->where('status', $i)->count();
         }
+
         return view('orders.index', compact('orders', 'ordersByStatus'));
     }
 }

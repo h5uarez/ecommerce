@@ -27,14 +27,14 @@
         <div class="mb-4">
             <x-jet-label value="Nombre" />
             <x-jet-input type="text" class="w-full" wire:model="name"
-                         placeholder="Ingrese el nombre del producto" />
+                placeholder="Ingrese el nombre del producto" />
             <x-jet-input-error for="name" />
         </div>
     </div>
     <div class="mb-4">
         <x-jet-label value="Slug" />
         <x-jet-input type="text" disabled wire:model="slug" class="w-full bg-gray-200"
-                     placeholder="Ingrese el slug del producto" />
+            placeholder="Ingrese el slug del producto" />
         <x-jet-input-error for="slug" />
     </div>
 

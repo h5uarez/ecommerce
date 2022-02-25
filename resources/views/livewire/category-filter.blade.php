@@ -16,7 +16,7 @@
             <ul class="divide-y divide-gray-200">
                 @foreach($category->subcategories as $subcategory)
                     <li class="py-2 text-sm ">
-                        <a class="cursor-pointer hover:text-orange-500 capitalize {{ $subcategoria == $subcategory->name ? 'text-orange-500 fontsemibold' : '' }}"
+                        <a dusk="subcategories_filter" class="cursor-pointer hover:text-orange-500 capitalize {{ $subcategoria == $subcategory->name ? 'text-orange-500 fontsemibold' : '' }}"
                            wire:click="$set('subcategoria', '{{ $subcategory->name }}')"
                         >{{ $subcategory->name }}</a>
                     </li>
@@ -27,14 +27,14 @@
             <ul class="divide-y divide-gray-200">
                 @foreach($category->brands as $brand)
                     <li class="py-2 text-sm ">
-                        <a class="cursor-pointer hover:text-orange-500 capitalize {{ $marca == $brand->name ? 'text-orange-500 font-semibold' : '' }}"
+                        <a dusk="brands_filter" class="cursor-pointer hover:text-orange-500 capitalize {{ $marca == $brand->name ? 'text-orange-500 font-semibold' : '' }}"
                            wire:click="$set('marca', '{{ $brand->name }}')"
                         >{{ $brand->name }}</a>
                     </li>
                 @endforeach
             </ul>
 
-            <x-jet-button class="mt-4" wire:click="limpiar" dusk="limpiar">
+            <x-jet-button class="mt-4" wire:click="limpiar">
                 Eliminar Filtros
             </x-jet-button>
         </aside>
@@ -51,7 +51,7 @@
                                 </figure>
                                 <div class="py-4 px-6">
                                     <h1 class="text-lg font-semibold">
-                                        <a href="{{ route('products.show', $product) }}">
+                                        <a dusk="product" href="{{ route('products.show', $product) }}">
                                             {{ Str::limit($product->name, 20) }}
                                         </a>
                                     </h1>
@@ -64,7 +64,7 @@
             @else
                 <ul>
                     @foreach($products as $product)
-                        <x-product-list :product="$product"></x-product-list>
+                        <x-products-list :product="$product"></x-products-list>
                     @endforeach
                 </ul>
             @endif

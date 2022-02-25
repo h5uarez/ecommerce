@@ -17,10 +17,9 @@
         "livewire/livewire": "^2.5"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
-        "laravel/dusk": "^6.22",
+        "laravel/dusk": "^6.21",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
@@ -31,13 +30,13 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        },
-        "files": ["app/helpers.php"]
+        }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": ["app/helpers.php"]
     },
     "scripts": {
         "post-autoload-dump": [

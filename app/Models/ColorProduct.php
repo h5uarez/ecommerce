@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
+use App\Models\Color;
 
 class ColorProduct extends Model
 {
@@ -16,7 +17,6 @@ class ColorProduct extends Model
     {
         return $this->belongsTo(Product::class);
     }
-
     public function color()
     {
         return $this->belongsTo(Color::class);

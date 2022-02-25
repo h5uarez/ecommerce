@@ -2,18 +2,18 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\City;
-use App\Models\Department;
-use App\Models\District;
-use App\Models\Order;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
+use App\Models\Department;
+use App\Models\Order;
+use App\Models\City;
+use App\Models\District;
 
 class CreateOrder extends Component
 {
     public $envio_type = 1;
-    public $contact, $phone, $shipping_cost;
     public $address, $reference;
+    public $contact, $phone, $shipping_cost;
     public $departments, $cities = [], $districts = [];
     public $department_id = '', $city_id = '', $district_id = '';
 
@@ -28,37 +28,9 @@ class CreateOrder extends Component
         $this->departments = Department::all();
     }
 
-    public function updatedDepartmentId($value)
-    {
-        $this->cities = City::where('department_id', $value)->get();
-
-        $this->reset(['city_id', 'district_id']);
-    }
-
-    public function updatedCityId($value)
-    {
-        $city = City::find($value);
-
-        $this->shipping_cost = $city->cost;
-
-        $this->districts = District::where('city_id', $value)->get();
-
-        $this->reset('district_id');
-    }
-
-    public function updatedEnvioType($value)
-    {
-        if ($value == 1) {
-            $this->resetValidation([
-                'department_id', 'city_id', 'district_id', 'address', 'reference',
-            ]);
-        }
-    }
-
     public function create_order()
     {
         $rules = $this->rules;
-
         if ($this->envio_type == 2) {
             $rules['department_id'] = 'required';
             $rules['city_id'] = 'required';
@@ -66,11 +38,9 @@ class CreateOrder extends Component
             $rules['address'] = 'required';
             $rules['reference'] = 'required';
         }
-
         $this->validate($rules);
 
         $order = new Order();
-
         $order->user_id = auth()->user()->id;
         $order->contact = $this->contact;
         $order->phone = $this->phone;
@@ -95,12 +65,34 @@ class CreateOrder extends Component
         }
 
         Cart::destroy();
-
         return redirect()->route('orders.payment', $order);
     }
 
     public function render()
     {
         return view('livewire.create-order');
+    }
+
+    public function updatedEnvioType($value)
+    {
+        if ($value == 1) {
+            $this->resetValidation([
+                'department_id', 'city_id', 'district_id', 'address', 'reference',
+            ]);
+        }
+    }
+
+    public function updatedDepartmentId($value)
+    {
+        $this->cities = City::where('department_id', $value)->get();
+        $this->reset(['city_id', 'district_id']);
+    }
+    public function updatedCityId($value)
+    {
+        $city = City::find($value);
+        $this->shipping_cost = $city->cost;
+
+        $this->districts = District::where('city_id', $value)->get();
+        $this->reset('district_id');
     }
 }

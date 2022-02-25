@@ -6,7 +6,7 @@
                     <ul class="slides">
                         @foreach($product->images as $image)
                             <li data-thumb="{{ Storage::url($image->url) }}">
-                                <img dusk="imagen_producto" src="{{ Storage::url($image->url) }}" />
+                                <img src="{{ Storage::url($image->url) }}"/>
                             </li>
                         @endforeach
                     </ul>
@@ -15,12 +15,11 @@
             <div>
                 <h1 class="text-xl font-bold text-trueGray-700">{{ $product->name }}</h1>
                 <div class="flex">
-                    <p class="text-trueGray-700">Marca: <a class="underline capitalize hover:text-orange-500" href="">{{ $product->brand->name }}</a></p>
+                    <p class="text-trueGray-700">Marca: <a class="underline capitalize hover:text-orange-500" href="">{{$product->brand->name }}</a></p>
                     <p class="text-trueGray-700 mx-6">5 <i class="fas fa-star text-sm text-yellow-400"></i></p>
                     <a class="text-orange-500 hover:text-orange-600 underline" href="">39 reseñas</a>
                 </div>
-                <p dusk="precio_producto" class="text-2xl font-semibold text-trueGray-700 my-4">{{ $product->price }} &euro;</p>
-
+                <p class="text-2xl font-semibold text-trueGray-700 my-4">{{ $product->price }} &euro;</p>
                 <div class="bg-white rounded-lg shadow-lg mb-6">
                     <div class="flex items-center p-4">
                         <span class="flex items-center justify-center h-10 w-10 rounded-full bg-lime-600">
@@ -32,7 +31,6 @@
                         </div>
                     </div>
                 </div>
-
                 @if ($product->subcategory->size)
                     @livewire('add-cart-item-size', ['product' => $product])
                 @elseif($product->subcategory->color)
@@ -46,7 +44,7 @@
 
     @push('scripts')
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('.flexslider').flexslider({
                     animation: "slide",
                     controlNav: "thumbnails"

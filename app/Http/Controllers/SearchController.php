@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class SearchController extends Controller
 {
@@ -12,7 +12,6 @@ class SearchController extends Controller
         $products = Product::where('name', 'LIKE' ,"%{$request->name}%")
             ->where('status', 2)
             ->paginate(8);
-
         return view('search', compact('products'));
     }
 }

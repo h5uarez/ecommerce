@@ -1,16 +1,15 @@
 <div class="container-menu py-8">
     <section class="bg-white rounded-lg shadow-lg p-6 text-gray-700">
         <h1 class="text-lg font-semibold mb-6">CARRITO DE COMPRAS</h1>
-
         @if(Cart::count())
             <table class="table-auto w-full">
                 <thead>
-                    <tr>
-                        <th></th>
-                        <th>Precio</th>
-                        <th>Cant</th>
-                        <th>Total</th>
-                    </tr>
+                <tr>
+                    <th></th>
+                    <th>Precio</th>
+                    <th>Cant</th>
+                    <th>Total</th>
+                </tr>
                 </thead>
                 <tbody>
                 @foreach(Cart::content() as $item)
@@ -21,26 +20,21 @@
                                 <div>
                                     <p class="font-bold">{{ $item->name }}</p>
                                     @if($item->options->color)
-                                        <span>
-                                            Color: {{ __(ucfirst($item->options->color)) }}
-                                        </span>
+                                        <span> Color: {{ __(ucfirst($item->options->color)) }} </span>
                                     @endif
                                     @if($item->options->size)
                                         <span class="mx-1">-</span>
-                                        <span>
-                                            {{ __($item->options->size) }}
-                                        </span>
+                                        <span> {{ __($item->options->size) }} </span>
                                     @endif
                                 </div>
                             </div>
                         </td>
-
                         <td class="text-center">
                             <span>{{ $item->price }} &euro;</span>
                             <a class="ml-6 cursor-pointer hover:text-red-600"
-                               wire:click="delete('{{ $item->rowId }}')"
-                               wire:loading.class="text-red-600 opacity-25"
-                               wire:target="delete('{{ $item->rowId }}')">
+                                wire:click="delete('{{ $item->rowId }}')"
+                                wire:loading.class="text-red-600 opacity-25"
+                                wire:target="delete('{{ $item->rowId }}')">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </td>
@@ -62,7 +56,6 @@
                 @endforeach
                 </tbody>
             </table>
-
             <a class="text-sm cursor-pointer hover:underline mt-3 inline-block"
                wire:click="destroy">
                 <i class="fas fa-trash"></i>
@@ -70,9 +63,8 @@
             </a>
         @else
             <div class="flex flex-col items-center">
-                <x-cart />
+                <x-cart/>
                 <p class="text-lg text-gray-700 mt-4">TU CARRITO DE COMPRAS ESTÁ VACÍO</p>
-
                 <x-button-link href="/" class="mt-4 px-16">
                     Ir al inicio
                 </x-button-link>
