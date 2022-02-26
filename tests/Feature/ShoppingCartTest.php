@@ -82,16 +82,20 @@ class ShoppingCartTest extends TestCase
     {
         $product1 = $this->createProduct(false, false, 2);
 
-        Livewire::test(AddCartItem::class, ['product' => $product1])
-            ->call('addItem', $product1)
-            ->call('addItem', $product1)
-            ->call('addItem', $product1);
+        for ($i = 0; $i < 2; $i++) {
+            Livewire::test(AddCartItem::class, ['product' => $product1])
+                ->call('addItem', $product1);
+            $product1->quantity = qty_available($product1->id);
+        }
 
-        Livewire::test(DropdownCart::class)
-            ->assertCount($product1->quantity);
-
-        //Sin terminar (no sabemos mostrar la cantidad)
+        $this->assertEquals(2, Cart::content()->first()->qty);
     }
+
+
+
+
+
+
 
 
     public function createProduct($color = false, $size = false, $quantity = 15)
@@ -121,7 +125,5 @@ class ShoppingCartTest extends TestCase
         ]);
 
         return $product;
-
-        //Sin terminar (la terminamos en clase)a
     }
 }
