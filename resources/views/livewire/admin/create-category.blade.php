@@ -85,9 +85,10 @@
                                 <span class="inline-block w-8 text-center mr-2">º
                                     {!! $category->icon !!}
                                 </span>
-                                <span class="uppercase">
+                                <a href="{{ route('admin.categories.show', $category) }}"
+                                    class="uppercase underline hover:text-blue-600">
                                     {{ $category->name }}
-                                </span>
+                                </a>
                             </td>
                             <td class="py-2">
                                 <div class="flex divide-x divide-gray-300 font-semibold">
@@ -160,12 +161,12 @@
                     Imagen
                 </x-jet-label>
                 <input wire:model="editImage" accept="image/*" type="file" class="mt-1" name=""
-                    id="{{ $image }}">
+                    id="{{ $image2 }}">
                 <x-jet-input-error for="editImage" />
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-danger-button wire:loading.attr="disabled" wire:target="editImage">
+            <x-jet-danger-button wire:click="update" wire:loading.attr="disabled" wire:target="editImage, update">
                 Actualizar
             </x-jet-danger-button>
         </x-slot>
