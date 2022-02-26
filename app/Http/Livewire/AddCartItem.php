@@ -16,6 +16,11 @@ class AddCartItem extends Component
         'size_id' => null,
     ];
 
+    public function render()
+    {
+        return view('livewire.add-cart-item');
+    }
+
     public function mount()
     {
         $this->quantity = qty_available($this->product->id);
@@ -26,7 +31,6 @@ class AddCartItem extends Component
     {
         $this->qty--;
     }
-
     public function increment()
     {
         $this->qty++;
@@ -44,14 +48,8 @@ class AddCartItem extends Component
         ]);
 
         $this->quantity = qty_available($this->product->id);
-
         $this->reset('qty');
 
         $this->emitTo('dropdown-cart', 'render');
-    }
-
-    public function render()
-    {
-        return view('livewire.add-cart-item');
     }
 }

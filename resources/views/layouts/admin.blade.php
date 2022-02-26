@@ -14,66 +14,67 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/glider-js/glider.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/flex-slider/flexslider.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.css') }}">
     @livewireStyles
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src="{{ asset('vendor/ckeditor/build/ckeditor.js') }}"></script>
-    <script src="{{ asset('vendor/glider-js/glider.min.js') }}"></script>
-    <script src="{{ asset('vendor/flex-slider/node_modules/jquery/dist/jquery.js') }}"></script>
-    <script src="{{ asset('vendor/flex-slider/jquery.flexslider-min.js') }}"></script>
+    <script src="{{ asset('vendor/ckeditor5/build/ckeditor.js') }}"></script>
+    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.js') }}"></script>
+
+    {{-- Dropzone --}}
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
 </head>
 
 <body class="font-sans antialiased">
-<x-jet-banner />
+    <x-jet-banner />
 
-<div class="min-h-screen bg-gray-100">
-    @livewire('navigation-menu')
+    <div class="min-h-screen bg-gray-100">
+        @livewire('navigation-menu')
 
-    @if (isset($header))
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
-@endif
+        @if (isset($header))
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
 
-<!-- Page Content -->
-    <main>
-        {{ $slot }}
-    </main>
-</div>
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
 
-@stack('modals')
+    @stack('modals')
 
-@livewireScripts
+    @livewireScripts
 
-<script>
-    function dropdown() {
-        return {
-            open: false,
-            show() {
-                if (this.open) {
+    <script>
+        function dropdown() {
+            return {
+                open: false,
+                show() {
+                    if (this.open) {
+                        this.open = false;
+                        document.getElementsByTagName('html')[0].style.overflow = 'auto'
+                    } else {
+                        this.open = true;
+                        document.getElementsByTagName('html')[0].style.overflow = 'hidden'
+                    }
+                },
+                close() {
                     this.open = false;
                     document.getElementsByTagName('html')[0].style.overflow = 'auto'
-                } else {
-                    this.open = true;
-                    document.getElementsByTagName('html')[0].style.overflow = 'hidden'
                 }
-            },
-            close() {
-                this.open = false;
-                document.getElementsByTagName('html')[0].style.overflow = 'auto'
             }
         }
-    }
-</script>
+    </script>
 
-@stack('scripts')
+    @stack('scripts')
+
 </body>
 
 </html>

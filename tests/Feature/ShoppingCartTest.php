@@ -90,7 +90,7 @@ class ShoppingCartTest extends TestCase
         Livewire::test(DropdownCart::class)
             ->assertCount($product1->quantity);
 
-
+        //Sin terminar (no sabemos mostrar la cantidad)
     }
 
 
@@ -121,5 +121,7 @@ class ShoppingCartTest extends TestCase
         ]);
 
         return $product;
+
+        //Sin terminar (la terminamos en clase)
     }
 }

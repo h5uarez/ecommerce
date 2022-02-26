@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Color;
+use App\Models\Size;
 
 class ColorSize extends Model
 {
@@ -15,7 +17,6 @@ class ColorSize extends Model
     {
         return $this->belongsTo(Color::class);
     }
-
     public function size()
     {
         return $this->belongsTo(Size::class);

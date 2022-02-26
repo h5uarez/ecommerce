@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Product;
-use App\Models\Size;
+use App\Models\{Product, Size};
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 function quantity($product_id, $color_id = null, $size_id = null)
@@ -55,7 +54,6 @@ function discount($item)
     } else {
         $product->quantity = $qty_available;
         $product->save();
-
     }
 }
 
