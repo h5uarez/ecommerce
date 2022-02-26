@@ -12,6 +12,8 @@ class ShowProducts2 extends Component
 
     public $search;
     public $pagination = 15;
+    public $columns = ['Categoría', 'Estado', 'Precio', 'Marca', 'Stock', 'Colores', 'Tallas', 'Fecha de creación', 'Fecha de edición'];
+    public $selectedColumns = [];
 
     public function render()
     {
@@ -29,5 +31,15 @@ class ShowProducts2 extends Component
     public function updatingPagination()
     {
         $this->resetPage();
+    }
+
+    public function mount()
+    {
+        $this->selectedColumns = $this->columns;
+    }
+
+    public function showColumn($column)
+    {
+        return in_array($column, $this->selectedColumns);
     }
 }
