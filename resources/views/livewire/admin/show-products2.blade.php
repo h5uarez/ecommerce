@@ -71,7 +71,7 @@
                 @endif
                 @if ($this->showColumn('Estado'))
                     <th scope="col"
-                        class=" text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        class=" text-center px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Estado
                     </th>
                 @endif

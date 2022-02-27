@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Http\Livewire\AddCartItem;
 use App\Http\Livewire\DropdownCart;
+use App\Http\Livewire\ShoppingCart;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Image;
@@ -92,7 +93,59 @@ class ShoppingCartTest extends TestCase
     }
 
 
+    /** @test */
+    public function see_product_available_stock()
+    {
+        $product1 = $this->createProduct();
+        $product2 = $this->createProduct(false, false, 12);
 
+        $this->get('products/' . $product1->slug)
+            ->assertStatus(200)
+            ->assertSeeText('Stock disponible: ' . $product1->quantity)
+            ->assertDontSeeText('Stock disponible: ' . $product2->quantity);
+
+        $this->get('products/' . $product2->slug)
+            ->assertStatus(200)
+            ->assertSeeText('Stock disponible: ' . $product2->quantity)
+            ->assertDontSeeText('Stock disponible: ' . $product1->quantity);
+    }
+
+    /** @test */
+    public function we_can_delete_the_product()
+    {
+        $product1 = $this->createProduct();
+
+        Livewire::test(AddCartItem::class, ['product' => $product1])
+            ->call('addItem', $product1);
+
+
+        Livewire::test(ShoppingCart::class)
+            ->assertSee($product1->name)
+            ->call('delete', Cart::content()->first()->rowId)
+            ->assertDontSee($product1->name);
+    }
+
+
+    /** @test */
+    public function we_can_delete_the_shopping_cart()
+    {
+        $product1 = $this->createProduct();
+        $product2 = $this->createProduct();
+
+        Livewire::test(AddCartItem::class, ['product' => $product1])
+            ->call('addItem', $product1)
+            ->call('addItem', $product1)
+            ->call('addItem', $product1);
+
+        Livewire::test(AddCartItem::class, ['product' => $product2])
+            ->call('addItem', $product2);
+
+
+        Livewire::test(ShoppingCart::class)
+            ->assertSee($product1->name, $product2->name)
+            ->call('destroy')
+            ->assertDontSee($product1->name, $product2->name);
+    }
 
 
 

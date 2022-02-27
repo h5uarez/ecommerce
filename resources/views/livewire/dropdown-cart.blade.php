@@ -34,7 +34,7 @@
                     </li>
                 @empty
                     <li class="py-6 px-4">
-                        <p class="text-center text-gray-700">
+                        <p dusk="emptycart" class="text-center text-gray-700">
                             No tiene agregado ningún item en el carrito
                         </p>
                     </li>
@@ -45,7 +45,8 @@
                 <div class="px-3 py-2">
                     <p class="text-lg text-gray-700 mt-2 mb-3"><span class="font-bold">Total:</span>
                         {{ Cart::subtotal() }} &euro;</p>
-                    <x-button-link dusk="shopping-cart" href="{{ route('shopping-cart') }}" class="w-full" color="orange">
+                    <x-button-link dusk="shopping-cart" href="{{ route('shopping-cart') }}" class="w-full"
+                        color="orange">
                         Ir al carrito de compras
                     </x-button-link>
                 </div>

@@ -13,6 +13,7 @@ class ShowProducts2 extends Component
     public $search;
     public $pagination = 15;
     public $columns = ['Categoría', 'Estado', 'Precio', 'Marca', 'Stock', 'Colores', 'Tallas', 'Fecha de creación', 'Fecha de edición'];
+    public $columsHumberto = ['Categoría', 'Estado', 'Precio', 'Marca', 'Stock', 'Colores', 'Tallas'];
     public $selectedColumns = [];
 
     public function render()
