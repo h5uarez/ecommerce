@@ -29,8 +29,8 @@ class ShoppingCartViewTest extends DuskTestCase
         $product1 = $this->createProduct();
 
         $this->browse(function (Browser $browser) use ($product1) {
-            Livewire::test(AddCartItem::class, ['product' => $product1])
-                ->call('addItem', $product1);
+            $browser->visit('/products/' . $product1->slug)
+                ->click('@add-cart');
             $browser->loginAs(User::factory()->create());
             $browser->visit('/orders/create')
                 ->check('@domicilio')
@@ -45,8 +45,8 @@ class ShoppingCartViewTest extends DuskTestCase
         $product1 = $this->createProduct();
 
         $this->browse(function (Browser $browser) use ($product1) {
-            Livewire::test(AddCartItem::class, ['product' => $product1])
-                ->call('addItem', $product1);
+            $browser->visit('/products/' . $product1->slug)
+                ->click('@add-cart');
             $browser->loginAs(User::factory()->create());
             $browser->visit('/orders/create')
                 ->assertMissing('@addressform')
@@ -60,8 +60,8 @@ class ShoppingCartViewTest extends DuskTestCase
         $product1 = $this->createProduct();
 
         $this->browse(function (Browser $browser) use ($product1) {
-            Livewire::test(AddCartItem::class, ['product' => $product1])
-                ->call('addItem', $product1);
+            $browser->visit('/products/' . $product1->slug)
+                ->click('@add-cart');
             $browser->loginAs(User::factory()->create());
             $browser->visit('/orders/create')
                 ->type('@contactname', 'Juan Cabalo Chiquito')
@@ -86,18 +86,18 @@ class ShoppingCartViewTest extends DuskTestCase
             'department_id' => $department->id
         ]);
 
-        District::factory()->create([
+        $district = District::factory()->create([
             'city_id' => $city->id
         ]);
 
 
 
-        $this->browse(function (Browser $browser) use ($product1) {
-
-            Livewire::test(AddCartItem::class, ['product' => $product1])
-                ->call('addItem', $product1);
-            $browser->loginAs(User::factory()->create());
-            $browser->visit('/orders/create')
+        $this->browse(function (Browser $browser) use ($product1, $district) {
+            $browser->loginAs(User::factory()->create())
+                ->visit('/products/' . $product1->slug)
+                ->click('@add-cart')
+                ->pause(500)
+                ->visit('/orders/create')
                 ->check('@domicilio')
                 ->click('@selectdepartment')
                 ->pause(500)
@@ -110,6 +110,7 @@ class ShoppingCartViewTest extends DuskTestCase
                 ->click('@selectdistrict')
                 ->pause(500)
                 ->click('@optiondistrict')
+                ->assertSee($district->name)
                 ->screenshot('selects_load_correctly');
         });
     }
