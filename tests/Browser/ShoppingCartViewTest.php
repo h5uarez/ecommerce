@@ -3,8 +3,10 @@
 namespace Tests\Browser;
 
 use App\Models\City;
+use App\Models\Size;
 use App\Models\User;
 use App\Models\Brand;
+use App\Models\Color;
 use App\Models\Image;
 use Livewire\Livewire;
 use App\Models\Product;
@@ -115,6 +117,130 @@ class ShoppingCartViewTest extends DuskTestCase
         });
     }
 
+
+    /** @test */
+    public function the_dropdown_menu_takes_us_to_orders_placed_by_us()
+    {
+        $product1 = $this->createProduct();
+
+        $this->browse(function (Browser $browser) use ($product1) {
+            $browser->loginAs(User::factory()->create())
+                ->visit('/products/' . $product1->slug)
+                ->click('@add-cart')
+                ->pause(500)
+                ->click('@dropdowncart')
+                ->pause(500)
+                ->click('@shopping-cart')
+                ->pause(500)
+                ->click('@continue')
+                ->pause(500)
+                ->type('@contactname', 'Juan Cabalo Chiquito')
+                ->type('@contactnumber', '667839485')
+                ->click('@buybutton')
+                ->pause(500)
+                ->visit('/')
+                ->click('@profile_image')
+                ->pause(500)
+                ->clickLink('Mis Pedidos')
+                ->assertSee('Pedidos recientes')
+                ->assertSee('PENDIENTE')
+                ->assertRouteIs('orders.index')
+                ->screenshot('the_dropdown_menu_takes_us_to_orders_placed_by_us');
+        });
+    }
+
+
+    /** @test */
+    public function the_stock_varies_when_adding_a_product_without_color_and_size()
+    {
+        $product1 = $this->createProduct(false, false, 50);
+
+        $this->browse(function (Browser $browser) use ($product1) {
+            $browser->loginAs(User::factory()->create())
+                ->visit('/products/' . $product1->slug)
+                ->click('@add-cart')
+                ->pause(500)
+                ->click('@add-cart')
+                ->pause(500)
+                ->click('@dropdowncart')
+                ->pause(500)
+                ->assertSee('Stock disponible: 48')
+                ->screenshot('the_stock_varies_when_adding_a_product_without_color_and_size');
+        });
+    }
+
+    /** @test */
+    public function the_stock_varies_when_adding_a_product_with_color_without_size()
+    {
+        $product1 = $this->createProduct(true, false);
+        $color = Color::create(['name' => 'Naranja']);
+
+        $product1->colors()->attach([
+            $color->id => [
+                'quantity' => 10
+            ]
+        ]);
+
+        $this->browse(function (Browser $browser) use ($product1) {
+            $browser->loginAs(User::factory()->create())
+                ->visit('/products/' . $product1->slug)
+                ->pause(500)
+                ->click('@color')
+                ->pause(500)
+                ->click('@colortype')
+                ->pause(500)
+                ->click('@add-color-item')
+                ->pause(500)
+                ->click('@add-color-item')
+                ->pause(500)
+                ->click('@dropdowncart')
+                ->pause(500)
+                ->assertSee('Stock disponible: 8')
+                ->screenshot('the_stock_varies_when_adding_a_product_with_color_without_size');
+        });
+    }
+
+    /** @test */
+    public function the_stock_varies_when_adding_a_product_with_color_and_size()
+    {
+        $product1 = $this->createProduct(true, true);
+        $color = Color::create(['name' => 'Naranja']);
+        $size = Size::create([
+            'name' => 'Talla XXXXL',
+            'product_id' => $product1->id
+        ]);
+
+        $size->colors()->attach([
+            1 => ['quantity' => 10],
+
+        ]);
+
+        $product1->colors()->attach([
+            $color->id => [
+                'quantity' => 10
+            ]
+        ]);
+
+        $this->browse(function (Browser $browser) use ($product1) {
+            $browser->loginAs(User::factory()->create())
+                ->visit('/products/' . $product1->slug)
+                ->pause(500)
+                ->click('@size')
+                ->pause(500)
+                ->click('@sizetype')
+                ->pause(500)
+                ->click('@color')
+                ->pause(500)
+                ->click('@colortype')
+                ->pause(500)
+                ->click('@add-full-item')
+                ->pause(500)
+                ->click('@dropdowncart')
+                ->pause(500)
+                ->assertSee('Stock disponible: 8')
+                ->screenshot('the_stock_varies_when_adding_a_product_with_color_and_size');
+        });
+    }
 
 
 

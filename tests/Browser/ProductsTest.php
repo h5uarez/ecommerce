@@ -80,7 +80,6 @@ class ProductsTest extends DuskTestCase
                 ->assertSee(substr($product5->name, 0, 9))
                 ->screenshot('five_products_main_view');
         });
-
     }
 
     /** @test */
@@ -257,7 +256,6 @@ class ProductsTest extends DuskTestCase
                 ->pause(500)
                 ->screenshot('filter_products_by_subcategory_or_brand');
         });
-
     }
 
     /** @test */
@@ -364,7 +362,6 @@ class ProductsTest extends DuskTestCase
                 ->assertMissing('@seleccionar_color')
                 ->screenshot('we_not_see_size_and_color');
         });
-
     }
 
     /** @test */
@@ -394,10 +391,9 @@ class ProductsTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($product1, $categories) {
             $browser->visit('/products/' . $product1->slug)
                 ->pause(500)
-                ->assertVisible('@seleccionar_color')
+                ->assertVisible('@color')
                 ->screenshot('we_see_color_of_product');
         });
-
     }
 
     /** @test */
@@ -428,10 +424,9 @@ class ProductsTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($product1, $categories) {
             $browser->visit('/products/' . $product1->slug)
                 ->pause(500)
-                ->assertVisible('@seleccionar_tamaño')
-                ->assertVisible('@seleccionar_colorT')
+                ->assertVisible('@size')
+                ->assertVisible('@color')
                 ->screenshot('we_see_size_and_color');
         });
-
     }
 }
