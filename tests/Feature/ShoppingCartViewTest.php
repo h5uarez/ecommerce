@@ -96,7 +96,7 @@ class ShoppingCartViewTest extends TestCase
 
 
     /** @test */
-    public function the_card_is_saved_when_you_log_out_and_is_retrieved_when_you_log_in()
+    public function the_cart_is_saved_when_you_log_out_and_is_retrieved_when_you_log_in()
     {
         $product1 = $this->createProduct();
         $user = User::factory()->create();
@@ -128,6 +128,8 @@ class ShoppingCartViewTest extends TestCase
             ->assertSee($product1->name)
             ->assertDontSee($product2->name);
     }
+
+    
 
 
 

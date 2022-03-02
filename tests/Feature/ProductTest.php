@@ -46,21 +46,6 @@ class ProductTest extends TestCase
     /** @test */
     public function check_the_expiration_of_pending_orders()
     {
-        $product1 = $this->createProduct(false, false, 10);
-        $this->actingAs(User::factory()->create());
-
-        Livewire::test(AddCartItem::class, ['product' => $product1])
-            ->call('addItem', $product1);
-
-
-        Livewire::test(CreateOrder::class)
-            ->set('contact', 'Juan Cabalo')
-            ->set('phone', '678728394')
-            ->call('create_order');
-
-        $this->assertDatabaseHas('products', [
-            'quantity' => 9
-        ]);
     }
 
 

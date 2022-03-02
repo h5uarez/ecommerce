@@ -71,6 +71,7 @@ class ProductsTest extends DuskTestCase
             'imageable_type' => Product::class
         ]);
 
+
         $this->browse(function (Browser $browser) use ($product1, $product2, $product3, $product4, $product5) {
             $browser->visit('/')
                 ->assertSee(substr($product1->name, 0, 9))
@@ -172,9 +173,10 @@ class ProductsTest extends DuskTestCase
             'imageable_type' => Product::class
         ]);
 
-        $this->browse(function (Browser $browser) use ($product1, $categories) {
+        $this->browse(function (Browser $browser) use ($product1, $categories, $subcategory, $brand) {
             $browser->visit('/categories/' . $categories->slug)
                 ->assertSee(substr($product1->name, 0, 9))
+                ->assertSee($subcategory->name)
                 ->screenshot('detail_view_category');
         });
     }

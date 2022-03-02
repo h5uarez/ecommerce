@@ -86,7 +86,7 @@ class ShoppingCartTest extends TestCase
         for ($i = 0; $i < 2; $i++) {
             Livewire::test(AddCartItem::class, ['product' => $product1])
                 ->call('addItem', $product1);
-            $product1->quantity = qty_available($product1->id);
+            $product1->quantity = qty_available($product1->id); //Para saber la cantidad total real, la quantity es el stock disponible que se ve en la vista
         }
 
         $this->assertEquals(2, Cart::content()->first()->qty);
@@ -149,7 +149,7 @@ class ShoppingCartTest extends TestCase
 
 
 
-    
+
 
 
     public function createProduct($color = false, $size = false, $quantity = 15)
