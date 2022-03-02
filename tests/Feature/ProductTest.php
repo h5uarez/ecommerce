@@ -6,14 +6,13 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Brand;
 use App\Models\Image;
+use App\Models\Order;
 use Livewire\Livewire;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Http\Livewire\AddCartItem;
 use App\Http\Livewire\CreateOrder;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProductTest extends TestCase
@@ -31,7 +30,6 @@ class ProductTest extends TestCase
         Livewire::test(AddCartItem::class, ['product' => $product1])
             ->call('addItem', $product1);
 
-
         Livewire::test(CreateOrder::class)
             ->set('contact', 'Juan Cabalo')
             ->set('phone', '678728394')
@@ -46,6 +44,25 @@ class ProductTest extends TestCase
     /** @test */
     public function check_the_expiration_of_pending_orders()
     {
+        $product1 = $this->createProduct();
+        $this->actingAs(User::factory()->create());
+
+        Livewire::test(AddCartItem::class, ['product' => $product1])
+            ->call('addItem', $product1);
+
+        Livewire::test(CreateOrder::class)
+            ->set('contact', 'Juan Cabalo')
+            ->set('phone', '678728394')
+            ->call('create_order');
+
+
+        $order = Order::first();
+        $order->created_at = now()->subMinute(15);
+        $order->save();
+
+        $this->artisan('schedule:run');
+        $order = Order::first();
+
     }
 
 
