@@ -12,7 +12,7 @@
 
     <x-table-responsive>
         <div class="px-6 py-4">
-            <x-jet-input class="w-full" wire:model="search" type="text"
+            <x-jet-input dusk="adminsearch" class="w-full" wire:model="search" type="text"
                 placeholder="Introduzca el nombre del producto a buscar" />
         </div>
 
