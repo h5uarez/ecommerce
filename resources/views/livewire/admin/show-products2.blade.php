@@ -62,30 +62,42 @@
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nombre
+                    <button wire:click="sortable('name')">
+                        <span>hola</span>
+                    </button>
                 </th>
+
                 @if ($this->showColumn('Categoría'))
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Categoría
-                    </th>
+                    <button wire:click="sortable('category')">
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Categoría
+                        </th>
+                    </button>
                 @endif
                 @if ($this->showColumn('Estado'))
-                    <th scope="col"
-                        class=" text-center px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Estado
-                    </th>
+                    <button wire:click="sortable('status')">
+                        <th scope="col"
+                            class=" text-center px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Estado
+                        </th>
+                    </button>
                 @endif
                 @if ($this->showColumn('Precio'))
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Precio
-                    </th>
+                    <button wire:click="sortable('price')">
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Precio
+                        </th>
+                    </button>
                 @endif
                 @if ($this->showColumn('Marca'))
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Marca
-                    </th>
+                    <button wire:click="sortable('brand_id')">
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Marca
+                        </th>
+                    </button>
                 @endif
                 @if ($this->showColumn('Stock'))
                     <th scope="col"
@@ -106,16 +118,20 @@
                     </th>
                 @endif
                 @if ($this->showColumn('Fecha de creación'))
-                    <th scope="col"
-                        class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
-                        Fecha de creación
-                    </th>
+                    <button wire:click="sortable('created_at')">
+                        <th scope="col"
+                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                            Fecha de creación
+                        </th>
+                    </button>
                 @endif
                 @if ($this->showColumn('Fecha de edición'))
-                    <th scope="col"
-                        class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
-                        Fecha de edición
-                    </th>
+                    <button wire:click="sortable('updated_at')">
+                        <th scope="col"
+                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                            Fecha de edición
+                        </th>
+                    </button>
                 @endif
                 <th scope="col" class="relative px-6 py-3">
                     <span class="sr-only">Editar</span>
