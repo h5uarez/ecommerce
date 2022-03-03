@@ -62,42 +62,30 @@
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nombre
-                    <button wire:click="sortable('name')">
-                        <span>hola</span>
-                    </button>
                 </th>
-
                 @if ($this->showColumn('Categoría'))
-                    <button wire:click="sortable('category')">
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Categoría
-                        </th>
-                    </button>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Categoría
+                    </th>
                 @endif
                 @if ($this->showColumn('Estado'))
-                    <button wire:click="sortable('status')">
-                        <th scope="col"
-                            class=" text-center px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Estado
-                        </th>
-                    </button>
+                    <th scope="col"
+                        class=" text-center px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Estado
+                    </th>
                 @endif
                 @if ($this->showColumn('Precio'))
-                    <button wire:click="sortable('price')">
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Precio
-                        </th>
-                    </button>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Precio
+                    </th>
                 @endif
                 @if ($this->showColumn('Marca'))
-                    <button wire:click="sortable('brand_id')">
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Marca
-                        </th>
-                    </button>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Marca
+                    </th>
                 @endif
                 @if ($this->showColumn('Stock'))
                     <th scope="col"
@@ -118,20 +106,16 @@
                     </th>
                 @endif
                 @if ($this->showColumn('Fecha de creación'))
-                    <button wire:click="sortable('created_at')">
-                        <th scope="col"
-                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
-                            Fecha de creación
-                        </th>
-                    </button>
+                    <th scope="col"
+                        class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                        Fecha de creación
+                    </th>
                 @endif
                 @if ($this->showColumn('Fecha de edición'))
-                    <button wire:click="sortable('updated_at')">
-                        <th scope="col"
-                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
-                            Fecha de edición
-                        </th>
-                    </button>
+                    <th scope="col"
+                        class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                        Fecha de edición
+                    </th>
                 @endif
                 <th scope="col" class="relative px-6 py-3">
                     <span class="sr-only">Editar</span>
