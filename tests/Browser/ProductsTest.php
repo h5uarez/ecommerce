@@ -361,7 +361,7 @@ class ProductsTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($product1, $categories) {
             $browser->visit('/products/' . $product1->slug)
                 ->pause(500)
-                ->assertMissing('@color')
+                ->assertMissing('@seleccionar_color')
                 ->screenshot('we_not_see_size_and_color');
         });
     }

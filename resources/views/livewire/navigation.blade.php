@@ -57,7 +57,7 @@
                             @csrf
 
                             <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                                this.closest('form').submit();">
+                                                                    this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-jet-dropdown-link>
                         </form>
@@ -66,7 +66,7 @@
             @else
                 <x-jet-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <i dusk="not_logged" class="fas fa-user-circle text-white text-3xl cursor-pointer"></i>
+                        <i class="fas fa-user-circle text-white text-3xl cursor-pointer"></i>
                     </x-slot>
 
                     <x-slot name="content">
@@ -146,7 +146,7 @@
                     Perfil
                 </a>
                 <a href="" onclick="event.preventDefault();
-                                               document.getElementById('logout-form').submit()"
+                                   document.getElementById('logout-form').submit()"
                     class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500 hover:text-white">
                     <span class="flex justify-center w-9">
                         <i class="fas fa-sign-out-alt"></i>

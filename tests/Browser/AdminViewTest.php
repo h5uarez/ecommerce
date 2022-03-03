@@ -22,9 +22,37 @@ class AdminViewTest extends DuskTestCase
     /** @test */
     public function check_admin_product_finder()
     {
-        $product1 = $this->createProduct('Zapatillas Jordan');
-        $product2 = $this->createProduct('Pantalones Levis');
+        $brand = Brand::factory()->create();
 
+        $category = Category::factory()->create([
+            'name' => 'Ropa',
+        ]);
+
+        $category->brands()->attach($brand->id);
+
+        $subcategory = Subcategory::factory()->create([
+            'category_id' => $category->id,
+        ]);
+
+        $product1 = Product::factory()->create([
+            'name' => 'Zapatillas ProBounce',
+            'subcategory_id' => $subcategory->id,
+        ]);
+
+        Image::factory()->create([
+            'imageable_id' => $product1->id,
+            'imageable_type' => Product::class,
+        ]);
+
+        $product2 = Product::factory()->create([
+            'name' => 'Camiseta Adidas',
+            'subcategory_id' => $subcategory->id,
+        ]);
+
+        Image::factory()->create([
+            'imageable_id' => $product2->id,
+            'imageable_type' => Product::class,
+        ]);
 
 
         Role::create(['name' => 'admin']);
@@ -40,62 +68,5 @@ class AdminViewTest extends DuskTestCase
                 ->assertDontSee($product2->name)
                 ->screenshot('check_admin_product_finder');
         });
-    }
-
-
-    /** @test */
-    public function check_product_creation_validation_include()
-    {
-        Role::create(['name' => 'admin']);
-
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::factory()->create()->assignRole('admin'))
-                ->pause(500)
-                ->visit('/admin')
-                ->pause(500)
-                ->type('@adminsearch', 'Zap')
-                ->pause(500)
-                ->screenshot('check_admin_product_finder');
-        });
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function createProduct($name)
-    {
-        $brand = Brand::factory()->create();
-
-        $category = Category::factory()->create([]);
-
-        $category->brands()->attach($brand->id);
-
-        $subcategory = Subcategory::factory()->create([
-            'category_id' => $category->id,
-            'color' => false,
-            'size' => false,
-        ]);
-
-        $product = Product::factory()->create([
-            'name' => $name,
-            'subcategory_id' => $subcategory->id,
-            'quantity' => 15,
-        ]);
-
-        Image::factory()->create([
-            'imageable_id' => $product->id,
-            'imageable_type' => Product::class,
-        ]);
-
-        return $product;
     }
 }
