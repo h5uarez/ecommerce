@@ -12,7 +12,6 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Subcategory;
 use App\Http\Livewire\AddCartItem;
-use App\Http\Livewire\ShoppingCart;
 use App\Http\Livewire\UpdateCartItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -97,7 +96,7 @@ class ShoppingCartViewTest extends TestCase
 
 
     /** @test */
-    public function the_cart_is_saved_when_you_log_out()
+    public function the_cart_is_saved_when_you_log_out_and_is_retrieved_when_you_log_in()
     {
         $product1 = $this->createProduct();
         $user = User::factory()->create();
@@ -109,10 +108,11 @@ class ShoppingCartViewTest extends TestCase
         $this->get('/orders/create')
             ->assertStatus(200)
             ->assertSee($product1->name);
-            
+
         $content = Cart::content();
+
         $this->post('logout');
-        $this->actingAs($user);
+
         $this->assertDatabaseHas('shoppingcart', ['content' => serialize($content)]);
     }
 
@@ -129,7 +129,7 @@ class ShoppingCartViewTest extends TestCase
             ->assertDontSee($product2->name);
     }
 
-
+    
 
 
 
