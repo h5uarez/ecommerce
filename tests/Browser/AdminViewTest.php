@@ -19,6 +19,9 @@ class AdminViewTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
+
+    //7- Comprobar el buscador de productos de Admin
+
     /** @test */
     public function check_admin_product_finder()
     {
