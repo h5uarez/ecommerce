@@ -32,8 +32,6 @@
                 </div>
             </div>
 
-
-
             <div x-data="{ dropdownColumnas: false }" @click.away="dropdownColumnas = false" class="ml-3">
                 <x-button-link class="ml-auto" @click="dropdownColumnas = !dropdownColumnas">
                     Columnas
@@ -50,6 +48,35 @@
                 </div>
             </div>
 
+
+            <div x-data="{ dropdownPrecio: false }" @click.away="dropdownPrecio = false" class="ml-3">
+                <x-button-link class="ml-auto" @click="dropdownPrecio = !dropdownPrecio">
+                    Precio
+                </x-button-link>
+
+                <div x-show="dropdownPrecio" class="absolute w-80 bg-gray-100 rounded-md p-2 shadow-lg">
+                    <h4 class="text-lg">Precio</h4>
+                    <div class="flex items-center mb-2">
+                        <label for="minPrice" class="mr-3">Min</label>
+                        <x-jet-input id="minPrice" class="w-24" wire:model="minPrice" type="number"
+                            placeholder="Min" />
+                    </div>
+                    <div class="flex items-center">
+                        <label for="maxPrice" class="mr-2">Max</label>
+                        <x-jet-input id="maxPrice" class="w-24" wire:model="maxPrice" type="number"
+                            placeholder="Max" />
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="bg-gray-100 shadow-lg  rounded ">
+
+            </div>
+
         </div>
 </div>
 
@@ -62,6 +89,9 @@
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nombre
+                    <button wire:click="sortable('name')">
+                        <span class="fa fa{{ $camp === 'name' ? $icon : '-circle' }}"></span>
+                    </button>
                 </th>
                 @if ($this->showColumn('Categoría'))
                     <th scope="col"
@@ -73,24 +103,34 @@
                     <th scope="col"
                         class=" text-center px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Estado
+
                     </th>
                 @endif
                 @if ($this->showColumn('Precio'))
                     <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Precio
+                        <button wire:click="sortable('price')">
+                            <span class="fa fa{{ $camp === 'price' ? $icon : '-circle' }}"></span>
+                        </button>
                     </th>
                 @endif
                 @if ($this->showColumn('Marca'))
                     <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Marca
+                        <button wire:click="sortable('brand_id')">
+                            <span class="fa fa{{ $camp === 'brand_id' ? $icon : '-circle' }}"></span>
+                        </button>
                     </th>
                 @endif
                 @if ($this->showColumn('Stock'))
                     <th scope="col"
-                        class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                        class="px-8 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                         Stock
+                        <button wire:click="sortable('quantity')">
+                            <span class="fa fa{{ $camp === 'quantity' ? $icon : '-circle' }}"></span>
+                        </button>
                     </th>
                 @endif
                 @if ($this->showColumn('Colores'))
@@ -109,12 +149,18 @@
                     <th scope="col"
                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                         Fecha de creación
+                        <button wire:click="sortable('created_at')">
+                            <span class="fa fa{{ $camp === 'created_at' ? $icon : '-circle' }}"></span>
+                        </button>
                     </th>
                 @endif
                 @if ($this->showColumn('Fecha de edición'))
                     <th scope="col"
                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                         Fecha de edición
+                        <button wire:click="sortable('updated_at')">
+                            <span class="fa fa{{ $camp === 'updated_at' ? $icon : '-circle' }}"></span>
+                        </button>
                     </th>
                 @endif
                 <th scope="col" class="relative px-6 py-3">

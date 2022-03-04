@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ColorProduct;
 use App\Models\ColorSize;
-
+use App\QueryFilter;
 
 class Product extends Model
 {
@@ -44,6 +44,15 @@ class Product extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+
+    public function scopeFilterBy($query, QueryFilter $filters, array $data)
+    {
+        return $filters->applyto($query, $data);
+    }
+
+
+
 
     public function getRouteKeyName()
     {
