@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Tareas;
 
+use App\CreateData;
 use Tests\TestCase;
 use App\Models\Size;
 use App\Models\Brand;
@@ -22,6 +23,7 @@ class ShoppingCartTest extends TestCase
 {
     use DatabaseMigrations;
     use CreateProduct;
+    use CreateData;
 
 
     //1- Comprobar que se agregan al carrito los tres tipos de productos que tenemos.
@@ -29,7 +31,7 @@ class ShoppingCartTest extends TestCase
     /** @test */
     public function the_product_is_added_to_the_cart_without_color_or_size()
     {
-        $product1 = $this->createProduct();
+        $product1 = $this->createData();
 
         Livewire::test(AddCartItem::class, ['product' => $product1])
             ->call('addItem', $product1);
@@ -40,7 +42,7 @@ class ShoppingCartTest extends TestCase
     /** @test */
     public function the_product_is_added_to_the_cart_with_color()
     {
-        $product1 = $this->createProduct(true);
+        $product1 = $this->createData(true);
 
         Livewire::test(AddCartItem::class, ['product' => $product1])
             ->call('addItem', $product1);
@@ -65,8 +67,8 @@ class ShoppingCartTest extends TestCase
     /** @test */
     public function items_are_displayed_when_clicking_on_the_cart_icon()
     {
-        $product1 = $this->createProduct();
-        $product2 = $this->createProduct();
+        $product1 = $this->createData();
+        $product2 = $this->createData();
 
         Livewire::test(AddCartItem::class, ['product' => $product1])
             ->call('addItem', $product1);
@@ -81,7 +83,7 @@ class ShoppingCartTest extends TestCase
     /** @test */
     public function when_adding_an_item_to_the_cart_the_number_in_the_red_circuit_increases()
     {
-        $product1 = $this->createProduct();
+        $product1 = $this->createData();
 
         Livewire::test(AddCartItem::class, ['product' => $product1])
             ->call('addItem', $product1);
@@ -95,7 +97,7 @@ class ShoppingCartTest extends TestCase
     /** @test */
     public function it_is_not_possible_to_add_more_quantity_of_a_product_without_color_and_size_than_the_stock_it_has_to_the_cart()
     {
-        $product1 = $this->createProduct(false, false, 2);
+        $product1 = $this->createData(false, false, 2);
 
         for ($i = 0; $i < 2; $i++) {
             Livewire::test(AddCartItem::class, ['product' => $product1])
@@ -109,7 +111,7 @@ class ShoppingCartTest extends TestCase
     /** @test */
     public function it_is_not_possible_to_add_more_quantity_of_a_product_with_color_without_size_than_the_stock_it_has_to_the_cart()
     {
-        $product1 = $this->createProduct(true, false, 2);
+        $product1 = $this->createData(true, false, 2);
 
         for ($i = 0; $i < 2; $i++) {
             Livewire::test(AddCartItem::class, ['product' => $product1])

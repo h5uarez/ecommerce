@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\CreateData;
 use App\CreateProduct;
 use App\Models\City;
 use App\Models\Size;
@@ -25,13 +26,14 @@ class ShoppingCartViewTest extends DuskTestCase
 {
     use DatabaseMigrations;
     use CreateProduct;
+    use CreateData;
 
     //12- Comprobar que según la elección realizada de envío a domicilio se muestra u oculta el formulario
 
     /** @test */
     public function shipping_option_is_selected()
     {
-        $product1 = $this->createProduct();
+        $product1 = $this->createData();
 
         $this->browse(function (Browser $browser) use ($product1) {
             $browser->visit('/products/' . $product1->slug)
@@ -47,7 +49,7 @@ class ShoppingCartViewTest extends DuskTestCase
     /** @test */
     public function shipping_option_is_not_selected()
     {
-        $product1 = $this->createProduct();
+        $product1 = $this->createData();
 
         $this->browse(function (Browser $browser) use ($product1) {
             $browser->visit('/products/' . $product1->slug)
@@ -64,7 +66,7 @@ class ShoppingCartViewTest extends DuskTestCase
     /** @test */
     public function the_order_is_created_the_cart_is_destroyed_and_redirected_to_the_new_route()
     {
-        $product1 = $this->createProduct();
+        $product1 = $this->createData();
 
         $this->browse(function (Browser $browser) use ($product1) {
             $browser->visit('/products/' . $product1->slug)
@@ -131,7 +133,7 @@ class ShoppingCartViewTest extends DuskTestCase
     /** @test */
     public function the_dropdown_menu_takes_us_to_orders_placed_by_us()
     {
-        $product1 = $this->createProduct();
+        $product1 = $this->createData();
 
         $this->browse(function (Browser $browser) use ($product1) {
             $browser->loginAs(User::factory()->create())
@@ -165,7 +167,7 @@ class ShoppingCartViewTest extends DuskTestCase
     /** @test */
     public function the_stock_varies_when_adding_a_product_without_color_and_size()
     {
-        $product1 = $this->createProduct(false, false, 50);
+        $product1 = $this->createData(false, false, 50);
 
         $this->browse(function (Browser $browser) use ($product1) {
             $browser->loginAs(User::factory()->create())
@@ -184,14 +186,7 @@ class ShoppingCartViewTest extends DuskTestCase
     /** @test */
     public function the_stock_varies_when_adding_a_product_with_color_without_size()
     {
-        $product1 = $this->createProduct(true, false);
-        $color = Color::create(['name' => 'Naranja']);
-
-        $product1->colors()->attach([
-            $color->id => [
-                'quantity' => 10
-            ]
-        ]);
+        $product1 = $this->createData(true, false, 10);
 
         $this->browse(function (Browser $browser) use ($product1) {
             $browser->loginAs(User::factory()->create())
@@ -207,7 +202,7 @@ class ShoppingCartViewTest extends DuskTestCase
                 ->pause(500)
                 ->click('@dropdowncart')
                 ->pause(500)
-                ->assertSee('Stock disponible: 8')
+                ->assertSee('Stock disponible: ' . $product1->quantity)
                 ->screenshot('the_stock_varies_when_adding_a_product_with_color_without_size');
         });
     }

@@ -2,10 +2,11 @@
 
 namespace Tests\Feature\Tareas;
 
-use App\CreateProduct;
+use App\CreateData;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Order;
+use App\CreateProduct;
 use Livewire\Livewire;
 use App\Http\Livewire\AddCartItem;
 use App\Http\Livewire\CreateOrder;
@@ -17,12 +18,14 @@ class ProductTest extends TestCase
 
     use CreateProduct;
 
+    use CreateData;
+
 
     //5- Comprobar que al generar el pedido, el stock cambia en la BD
     /** @test */
     public function when_we_generate_the_order_its_decremented_in_the_db()
     {
-        $product1 = $this->createProduct(false, false, 10);
+        $product1 = $this->createData(false, false, 10);
         $this->actingAs(User::factory()->create());
 
         Livewire::test(AddCartItem::class, ['product' => $product1])
