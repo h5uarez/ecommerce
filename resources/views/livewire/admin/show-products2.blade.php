@@ -9,7 +9,7 @@
             </x-button-link>
         </div>
     </x-slot>
-    
+
     <x-table-responsive>
         <div class="px-6 pt-4">
             <x-jet-input class="w-full" wire:model="search" type="text" placeholder="Buscador" />
