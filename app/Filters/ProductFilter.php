@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Filters;
 
-use App\QueryFilter;
+use App\Filters\QueryFilter;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
-
+//Examen
 class ProductFilter extends QueryFilter
 {
     public function rules(): array

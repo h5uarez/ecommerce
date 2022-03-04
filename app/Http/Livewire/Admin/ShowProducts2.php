@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Size;
 use App\Models\Brand;
 use App\Models\Color;
-use App\ProductFilter;
+use App\Filters\ProductFilter;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;

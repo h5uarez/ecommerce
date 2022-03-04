@@ -89,11 +89,11 @@
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nombre
-                    <button wire:click="sortCol('name', 'asc')" >
-                        <span class="fa fa-circle">a</span>
+                    <button wire:click="sortCol('name', 'asc')">
+                        <span class="fa fa-arrow-up"></span>
                     </button>
-                    <button wire:click="sortCol('name', 'desc')" >
-                        <span class="fa fa-circle">a</span>
+                    <button wire:click="sortCol('name', 'desc')">
+                        <span class="fa fa-arrow-down"></span>
                     </button>
                 </th>
                 @if ($this->showColumn('Categoría'))
@@ -113,11 +113,11 @@
                     <th scope="col"
                         class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Precio
-                        <button wire:click="sortCol('price', 'asc')" >
-                            <span class="fa fa-circle">a</span>
+                        <button wire:click="sortCol('price', 'asc')">
+                            <span class="fa fa-arrow-up"></span>
                         </button>
-                        <button wire:click="sortCol('price', 'desc')" >
-                            <span class="fa fa-circle">a</span>
+                        <button wire:click="sortCol('price', 'desc')">
+                            <span class="fa fa-arrow-down"></span>
                         </button>
                     </th>
                 @endif
@@ -125,17 +125,17 @@
                     <th scope="col"
                         class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Marca
-                        <button wire:click="sortable('brand_id')">
-                            <span class="fa fa-circle">a</span>
-                        </button>
                     </th>
                 @endif
                 @if ($this->showColumn('Stock'))
                     <th scope="col"
-                        class="px-8 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                        class="px-14 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                         Stock
-                        <button wire:click="sortable('quantity')">
-                            <span class="fa fa-circle">a</span>
+                        <button wire:click="sortCol('quantity', 'asc')">
+                            <span class="fa fa-arrow-up"></span>
+                        </button>
+                        <button wire:click="sortCol('quantity', 'desc')">
+                            <span class="fa fa-arrow-down"></span>
                         </button>
                     </th>
                 @endif
@@ -155,8 +155,11 @@
                     <th scope="col"
                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                         Fecha de creación
-                        <button wire:click="sortable('created_at')">
-                            <span class="fa fa-circle">a</span>
+                        <button wire:click="sortCol('created_at', 'asc')">
+                            <span class="fa fa-arrow-up"></span>
+                        </button>
+                        <button wire:click="sortCol('created_at', 'desc')">
+                            <span class="fa fa-arrow-down"></span>
                         </button>
                     </th>
                 @endif
@@ -164,8 +167,11 @@
                     <th scope="col"
                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                         Fecha de edición
-                        <button wire:click="sortable('updated_at')">
-                            <span class="fa fa-circle">a</span>
+                        <button wire:click="sortCol('updated_at', 'asc')">
+                            <span class="fa fa-arrow-up"></span>
+                        </button>
+                        <button wire:click="sortCol('updated_at', 'desc')">
+                            <span class="fa fa-arrow-down"></span>
                         </button>
                     </th>
                 @endif

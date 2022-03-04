@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ColorProduct;
 use App\Models\ColorSize;
-use App\QueryFilter;
+use App\Filters\QueryFilter;
 
 class Product extends Model
 {
