@@ -19,13 +19,14 @@ class ShowProducts2 extends Component
 
     public $search;
     public $pagination = 15;
-    public $columns = ['Categoría', 'Estado', 'Precio', 'Marca', 'Stock', 'Colores', 'Tallas', 'Fecha de creación', 'Fecha de edición'];
+    public $columns = ['Categoría', 'Estado', 'Precio', 'Marca', 'Stock', 'Vendido', 'Colores', 'Tallas', 'Fecha de creación', 'Fecha de edición'];
     public $selectedColumns = [];
-    public $icon = '-circle';
     public $maxPrice = 80000;
     public $minPrice = 0;
     public $orderColumn = 'name';
     public $orderDirection = 'asc';
+    public $from = '';
+    public $to = '';
 
     public function sortCol($orderColumn, $orderDirection)
     {
@@ -48,6 +49,8 @@ class ShowProducts2 extends Component
             ->filterBy($productFilter, [
                 'price' => $priceMaxMin,
                 'order' => $dataOrder,
+                'from' => $this->from,
+                'to' => $this->to,
             ])->paginate($this->pagination);
 
         return $products;

@@ -3,6 +3,7 @@
 namespace App\Filters;
 
 use App\Filters\QueryFilter;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +14,9 @@ class ProductFilter extends QueryFilter
     {
         return [
             'price' => '',
-            'order' => ''
+            'order' => '',
+            'from' => 'date_format:d/m/Y',
+            'to' => 'date_format:d/m/Y',
         ];
     }
 
@@ -26,5 +29,19 @@ class ProductFilter extends QueryFilter
     public function price($query, $range)
     {
         return $query->whereBetween('price', [$range[0], $range[1]]);
+    }
+
+    public function from($query, $date)
+    {
+        $date = Carbon::createFromFormat('d/m/Y', $date);
+
+        $query->whereDate('created_at', '>=', $date);
+    }
+
+    public function to($query, $date)
+    {
+        $date = Carbon::createFromFormat('d/m/Y', $date);
+
+        $query->whereDate('created_at', '<=', $date);
     }
 }

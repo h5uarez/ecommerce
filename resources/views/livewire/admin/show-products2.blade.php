@@ -9,7 +9,7 @@
             </x-button-link>
         </div>
     </x-slot>
-
+    
     <x-table-responsive>
         <div class="px-6 pt-4">
             <x-jet-input class="w-full" wire:model="search" type="text" placeholder="Buscador" />
@@ -139,6 +139,18 @@
                         </button>
                     </th>
                 @endif
+                @if ($this->showColumn('Vendido'))
+                    <th scope="col"
+                        class="px-14 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                        Vendido
+                        <button wire:click="sortCol('quantity', 'asc')">
+                            <span class="fa fa-arrow-up"></span>
+                        </button>
+                        <button wire:click="sortCol('quantity', 'desc')">
+                            <span class="fa fa-arrow-down"></span>
+                        </button>
+                    </th>
+                @endif
                 @if ($this->showColumn('Colores'))
                     <th scope="col"
                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
@@ -235,6 +247,12 @@
                             @endif
                         </td>
                     @endif
+                    @if ($this->showColumn('Vendidos'))
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {{ implode(', ', $product->colors->pluck('name')->all()) }}
+                        </td>
+                    @endif
+
                     @if ($this->showColumn('Colores'))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {{ implode(', ', $product->colors->pluck('name')->all()) }}
