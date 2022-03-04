@@ -12,6 +12,9 @@ class SubcategoryTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
+
+    //3- Desarrollar una prueba para comprobar que al pinchar en categorías, éstas se ven
+
     /** @test */
     public function see_category()
     {
@@ -23,6 +26,8 @@ class SubcategoryTest extends DuskTestCase
                 ->screenshot('see_category-test');
         });
     }
+
+    //4- Lo mismo para las subcategorías
 
     /** @test */
     public function see_subcategory()
