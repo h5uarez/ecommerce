@@ -89,8 +89,11 @@
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nombre
-                    <button wire:click="sortable('name')">
-                        <span class="fa fa{{ $camp === 'name' ? $icon : '-circle' }}"></span>
+                    <button wire:click="sortCol('name', 'asc')" >
+                        <span class="fa fa-circle">a</span>
+                    </button>
+                    <button wire:click="sortCol('name', 'desc')" >
+                        <span class="fa fa-circle">a</span>
                     </button>
                 </th>
                 @if ($this->showColumn('Categoría'))
@@ -110,8 +113,11 @@
                     <th scope="col"
                         class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Precio
-                        <button wire:click="sortable('price')">
-                            <span class="fa fa{{ $camp === 'price' ? $icon : '-circle' }}"></span>
+                        <button wire:click="sortCol('price', 'asc')" >
+                            <span class="fa fa-circle">a</span>
+                        </button>
+                        <button wire:click="sortCol('price', 'desc')" >
+                            <span class="fa fa-circle">a</span>
                         </button>
                     </th>
                 @endif
@@ -120,7 +126,7 @@
                         class="px-8 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Marca
                         <button wire:click="sortable('brand_id')">
-                            <span class="fa fa{{ $camp === 'brand_id' ? $icon : '-circle' }}"></span>
+                            <span class="fa fa-circle">a</span>
                         </button>
                     </th>
                 @endif
@@ -129,7 +135,7 @@
                         class="px-8 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                         Stock
                         <button wire:click="sortable('quantity')">
-                            <span class="fa fa{{ $camp === 'quantity' ? $icon : '-circle' }}"></span>
+                            <span class="fa fa-circle">a</span>
                         </button>
                     </th>
                 @endif
@@ -150,7 +156,7 @@
                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                         Fecha de creación
                         <button wire:click="sortable('created_at')">
-                            <span class="fa fa{{ $camp === 'created_at' ? $icon : '-circle' }}"></span>
+                            <span class="fa fa-circle">a</span>
                         </button>
                     </th>
                 @endif
@@ -159,7 +165,7 @@
                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                         Fecha de edición
                         <button wire:click="sortable('updated_at')">
-                            <span class="fa fa{{ $camp === 'updated_at' ? $icon : '-circle' }}"></span>
+                            <span class="fa fa-circle">a</span>
                         </button>
                     </th>
                 @endif

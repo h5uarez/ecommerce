@@ -13,7 +13,13 @@ class ProductFilter extends QueryFilter
     {
         return [
             'price' => '',
+            'order' => ''
         ];
+    }
+
+    public function order($query, $dataOrder)
+    {
+        return $query->orderBy($dataOrder[0], $dataOrder[1]);
     }
 
 

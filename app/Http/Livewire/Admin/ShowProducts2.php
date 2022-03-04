@@ -21,36 +21,18 @@ class ShowProducts2 extends Component
     public $pagination = 15;
     public $columns = ['Categoría', 'Estado', 'Precio', 'Marca', 'Stock', 'Colores', 'Tallas', 'Fecha de creación', 'Fecha de edición'];
     public $selectedColumns = [];
-    public $camp = null;
-    public $order = null;
     public $icon = '-circle';
     public $maxPrice = 80000;
     public $minPrice = 0;
+    public $orderColumn = 'name';
+    public $orderDirection = 'asc';
 
-
-
-    public function sortable($camp)
+    public function sortCol($orderColumn, $orderDirection)
     {
-        if ($camp !== $this->camp) {
-            $this->order = null;
-        }
-        switch ($this->order) {
-            case null:
-                $this->order = 'asc';
-                $this->icon = '-arrow-circle-up';
-                break;
-            case 'asc':
-                $this->order = 'desc';
-                $this->icon = '-arrow-circle-down';
-                break;
-            case 'desc':
-                $this->order = null;
-                $this->icon = '-circle';
-                break;
-        }
-
-        $this->camp = $camp;
+        $this->orderColumn = $orderColumn;
+        $this->orderDirection = $orderDirection;
     }
+
 
     public function updatingSearch()
     {
@@ -60,18 +42,16 @@ class ShowProducts2 extends Component
     protected function getProducts(ProductFilter $productFilter)
     {
         $priceMaxMin = [$this->minPrice, $this->maxPrice];
+        $dataOrder = [$this->orderColumn, $this->orderDirection];
 
         $products = Product::query()
             ->filterBy($productFilter, [
                 'price' => $priceMaxMin,
+                'order' => $dataOrder,
             ])->paginate($this->pagination);
 
         return $products;
     }
-
-
-
-
 
     public function updatingPagination()
     {
@@ -93,17 +73,11 @@ class ShowProducts2 extends Component
 
         $products = Product::query()->where('name', 'LIKE', "%{$this->search}%");
 
-
-        if ($this->camp && $this->order) {
-            $products = $products->orderBy($this->camp, $this->order);
-        }
-
         $products = $products->paginate($this->pagination);
-
-
 
         return view('livewire.admin.show-products2', [
             'products' => $this->getProducts($productFilter),
+            'orderDirection' => $this->orderDirection,
         ])->layout('layouts.admin');
     }
 }
